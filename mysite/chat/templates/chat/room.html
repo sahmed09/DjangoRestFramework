@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+
+    <title>Chat Room</title>
+</head>
+
+<body>
+<div class="container">
+    <div class="row justify-content-center my-4">
+        <div class="col">
+            <label for="chat-log">Chat log</label>
+            <textarea id="chat-log" class="form-control"  cols="100" rows="20"></textarea><br>
+
+            <label for="chat-message-input">Enter Message</label>
+            <input id="chat-message-input" class="form-control my-2" type="text" size="100"><br>
+            <input id="chat-message-submit" type="button" value="Send">
+            {{ room_name|json_script:"room-name" }}
+        </div>
+    </div>
+</div>
+
+<script>
+    console.log(window.location)
+    const roomName = JSON.parse(document.getElementById('room-name').textContent);
+
+    const chatSocket = new WebSocket(
+        'ws://'
+        + window.location.host
+        + '/ws/'
+        + roomName
+        + '/'
+    );
+
+    // var loc = window.location
+    // var wsStart = 'ws://'
+
+    // if (loc.protocol == 'https:') {
+    //     wsStart = 'wss://'
+    // }
+    // var endpoint = wsStart + loc.host + loc.pathname
+    // const chatSocket = new WebSocket(endpoint);
+
+    // const chatSocket = new WebSocket(
+    //     'ws://' + window.location.host + '/ws/' + roomName + '/'
+    // );
+
+    chatSocket.onmessage = function(e) {
+        console.log(e.data);
+        const data = JSON.parse(e.data);
+        document.querySelector('#chat-log').value += (data.message + '\n');
+    };
+
+    chatSocket.onopen = function(e) {
+        console.log('open', e);
+    };
+
+    chatSocket.onerror = function(e) {
+        console.log('error', e);
+    };
+
+    chatSocket.onclose = function(e) {
+        console.error('Chat socket closed unexpectedly');
+    };
+
+    document.querySelector('#chat-message-input').focus();
+    document.querySelector('#chat-message-input').onkeyup = function(e) {
+        if (e.keyCode === 13) {  // enter, return
+            document.querySelector('#chat-message-submit').click();
+        }
+    };
+
+    document.querySelector('#chat-message-submit').onclick = function(e) {
+        const messageInputDom = document.querySelector('#chat-message-input');
+        const message = messageInputDom.value;
+        chatSocket.send(JSON.stringify({
+            'message': message
+        }));
+        messageInputDom.value = '';
+    };
+
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
+        crossorigin="anonymous"></script>
+</body>
+</html>

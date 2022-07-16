@@ -1,0 +1,64 @@
+{
+    "refresh": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTYzMjEyMzEwMSwianRpIjoiOGZmMGJhNGQ2MmI1NGI3OThiNjAyM2NjYTJiZWJjNzgiLCJ1c2VyX2lkIjoxfQ.6BILtoCQAxW5VDDuNgpV52iXqljI8_ZzuUKicCbL7CQ",
+    "access": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjYzNTcyNzAxLCJqdGkiOiI4YjhhNmZiNTVlNzY0ZDRiYTlmMzc5ZTQyOTVjOWJjNSIsInVzZXJfaWQiOjF9.YR9LEm8Dc-VhRGOl_sSsxZ5RoJ1kGSSFf6RXbohYfhk"
+}
+
+
+sudo apt install -y python3-venv
+mkdir GridFlow
+cd GridFlow
+virtualenv venv
+
+remove directory: rm -rf "folder name"
+nohup(keep running file in background): nohup python manage.py runserver 0.0.0.0:8000 &
+display list of running processes Python?: ps -ef | grep python
+
+Error: git: fatal: Could not read from remote repository
+Solution:
+	eval `ssh-agent -s`
+	ssh-add ~/.ssh/id_rsa
+git clone -b shop https://gitlab.com/gridflow/gridflow-api.git
+pip3 install -r requirements.txt
+
+
+ssh ubuntu@0.0.0.0
+cd GridFlow
+. venv/bin/activate
+cd gridflow-api
+python manage.py runserver 0.0.0.0:8000
+http://0.0.0.0:8000
+deactivate
+
+
+UBUNTU Server:
+root pass -> sa525658
+sudo mysql -u root
+CREATE DATABASE gridflow CHARACTER SET UTF8;
+CREATE USER 'GridFlowuser'@'localhost' IDENTIFIED BY 'admin123';
+GRANT ALL PRIVILEGES ON gridflow.* TO root@localhost;
+FLUSH PRIVILEGES;
+
+Install MySQL on UBUNTU Server:
+sudo apt install libmysqlclient-dev
+pip3 install mysqlclient
+
+
+mysql -u root -p  (Password: sa525658)
+USE mysql;
+SELECT User, Host, plugin FROM mysql.user;
+exit
+
+sudo mysql -u root
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'sa525658'; 
+sudo service mysql restart
+
+
+null=True, to allow in database
+blank=True, to allow in form validation
+
+cd ..
+cd ..
+nano ~/.bashrc
+export MySQL_DATABASE="gridflow"
+export MySQL_USER="root"
+export MySQL_PASSWORD="sa525658"

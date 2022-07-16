@@ -1,0 +1,47 @@
+Product
+ - variation
+
+Variation
+ - id
+
+ProductVariations
+ - variation
+ - product
+
+VariationCategoryAttributes
+ - variation
+ - category_attributes
+
+
+ID: AKIATGA5PGPHCOSBJBGE 
+Key: HQ/5K0rRQLaps7OD3VN/DPkb2+VLKz3qdFBylgjH
+region: ap-southeast-1
+
+Api-> 
+{
+	"name": "",
+	"variation": [
+		{
+			"name": "",
+			"slug": ""
+		}
+	],
+	"variation_attributes": [
+		{
+			"attribute_name": "name",
+			"choices": [
+				{
+					"value": value1
+				}, 
+				{
+					"value": "value2
+				}..... 	
+			]
+		}
+	]
+}
+
+
+
+Self_referencing
+enum

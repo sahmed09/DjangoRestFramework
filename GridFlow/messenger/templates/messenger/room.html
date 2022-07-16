@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+
+    <title>Chat Box</title>
+</head>
+
+<body>
+<div class="container">
+    <div class="row justify-content-center my-4">
+        <div class="col">
+            <label for="chat-log">Chat Box</label>
+            <textarea id="chat-log" class="form-control"  cols="100" rows="20"></textarea><br>
+
+            {{ room_name|json_script:"room-name" }}
+            {{ token|json_script:"token" }}
+        </div>
+    </div>
+</div>
+
+<script>
+    // console.log(window.location)
+    const roomName = JSON.parse(document.getElementById('room-name').textContent);
+    const token = JSON.parse(document.getElementById('token').textContent);
+
+    const chatSocket = new WebSocket(
+        'ws://'
+        + window.location.host
+        + '/ws/messenger/'
+        + roomName
+        + '/'
+        +'?token='
+        + token
+    );
+
+    chatSocket.onmessage = function(e) {
+        document.querySelector('#chat-log').value += (e.data + '\n');
+    };
+
+    chatSocket.onopen = function(e) {
+        console.log('open', e);
+    };
+
+    chatSocket.onerror = function(e) {
+        console.log('error', e);
+    };
+
+    chatSocket.onclose = function(e) {
+        console.error('Chat socket closed unexpectedly');
+    };
+
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
+        crossorigin="anonymous"></script>
+</body>
+</html>
