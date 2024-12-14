@@ -7,7 +7,7 @@ http://54.251.167.179:8000/api/store/
 http://54.251.167.179:8000/api/store/category_api/ <br>
 Required fields: name <br>
 Example:
-```
+```json
 {
     "name": "Mouse"
 }
