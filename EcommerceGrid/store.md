@@ -13,7 +13,7 @@ Example:
 }
 ```
 Output:
-```
+```json
 {
     "id": 2,
     "name": "Mouse",
@@ -21,8 +21,8 @@ Output:
 }
 ```
 Filtering Example:
-```
 http://54.251.167.179:8000/api/store/category_api/?search=mouse
+```json
 Output:
 {
     "id": 2,
@@ -36,14 +36,14 @@ http://54.251.167.179:8000/api/store/brand_api/ <br>
 Required fields: name <br>
 Optional Field: album <br>
 Example:
-```
+```json
 {
     "name": "Acer",
     "album": {"name": "album_name"}
 }
 ```
 Output:
-```
+```json
 {
     "id": 1,
     "name": "Singer",
@@ -52,8 +52,8 @@ Output:
 }
 ```
 Filtering Example:
-```
 http://54.251.167.179:8000/api/store/brand_api/?search=singer
+```json
 Output:
 {
     "id": 1,
@@ -74,7 +74,7 @@ http://54.251.167.179:8000/api/store/product_api/ <br>
 Required fields: category, brand, name <br>
 Optional Field: album <br>
 Example:
-```
+```json
 {
     "name": "LogiTech Mouse",
     "category": {"slug": "mouse"},
@@ -83,7 +83,7 @@ Example:
 }
 ```
 Output:
-```
+```json
 {
     "id": 1,
     "name": "LogiTech Mouse",
@@ -104,8 +104,8 @@ Output:
 }
 ```
 Searching Example:
-```
 http://54.251.167.179:8000/api/store/product_api/?search=Singer Double Door Frost Fridge
+```json
 Output:
 {
     "id": 1,
@@ -138,8 +138,8 @@ Output:
 http://54.251.167.179:8000/api/store/product_list/ <br>
 Filtering Options: category__slug, attribute_name=attribute_value <br>
 Filtering Example:
-```
 http://54.251.167.179:8000/api/store/product_list/?category__slug=fridge&no-of-window=2&frostability=non-frost
+```json
 Output:
 {
     "id": 2,
@@ -172,7 +172,7 @@ Output:
 http://54.251.167.179:8000/api/store/product_variations_api/ <br>
 Required fields: product, variation <br>
 Example:
-```
+```json
 {
     "product": {
         "slug": "walton-double-door-non-frost-fridge"
@@ -181,7 +181,7 @@ Example:
 }
 ```
 Output:
-```
+```json
 {
     "product": {
         "name": "Singer Double Door Frost Fridge",
@@ -194,14 +194,14 @@ Output:
 http://54.251.167.179:8000/api/store/category_attribute_api/ <br>
 Required fields: category, attribute_name <br>
 Example:
-```
+```json
 {
     "category": {"slug": "keyboard"},
     "attribute_name": "Total Keys"
 }
 ```
 Output:
-```
+```json
 {
     "category": {
         "id": 3,
@@ -213,8 +213,8 @@ Output:
 }
 ```
 Filtering Example:
-```
 http://54.251.167.179:8000/api/store/category_attribute_api/?category__slug=fridge
+```json
 Output:
 [
     {
@@ -242,14 +242,14 @@ Output:
 http://54.251.167.179:8000/api/store/variation_category_attributes_api/ <br>
 Required fields: <br>
 Example:
-```
+```json
 {
     "category_attribute": {"slug": "no-of-window"},
     "variation": 1
 }
 ```
 Output:
-```
+```json
 {
     "category_attribute": {
         "attribute_name": "No of window",
@@ -263,14 +263,14 @@ Output:
 http://54.251.167.179:8000/api/store/category_attribute_choices_api/ <br>
 Required fields: category_attribute, attribute_value <br>
 Example:
-```
+```json
 {
     "category_attribute": {"slug": "total-keys"},
     "attribute_value": 106
 }
 ```
 Output:
-```
+```json
 {
     "id": 7,
     "category_attribute": {
@@ -282,8 +282,8 @@ Output:
 }
 ```
 Filtering Example:
-```
 http://54.251.167.179:8000/api/store/category_attribute_choices_api/?category_attribute__slug=total-keys
+```json
 Output:
 [
     {
@@ -311,14 +311,14 @@ Output:
 http://54.251.167.179:8000/api/store/product_category_attribute_choices_api/ <br>
 Required fields: product, category_attribute_choices <br>
 Example:
-```
+```json
 {
     "product": {"slug": "walton-double-door-non-frost-fridge"},
     "category_attribute_choices": {"slug": "non-frost"}
 }
 ```
 Output:
-```
+```json
 {
     "id": 2,
     "product": {
@@ -337,8 +337,8 @@ Output:
 }
 ```
 Filtering Example:
-```
 http://54.251.167.179:8000/api/store/product_category_attribute_choices_api/?product__slug=singer-double-door-frost-fridge
+```json
 [
     {
         "id": 1,
@@ -384,6 +384,8 @@ http://54.251.167.179:8000/api/store/product_attributes_api/?product__slug=walto
 ```
 POST request:
 http://54.251.167.179:8000/api/store/product_attributes_api/?product__slug=walton-fridge
+```
+```json
 {
     "data": [
         {
